@@ -1,0 +1,214 @@
+<Window x:Class="CertDecipher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CertDecipher - Certificate Viewer 1.0.1"
+        Height="650"
+        Width="900"
+        MinHeight="500"
+        MinWidth="700"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E">
+
+    <Window.Resources>
+        <!-- Dark Theme Colors -->
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="PanelBrush" Color="#252526"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#3E3E42"/>
+        <SolidColorBrush x:Key="TextBrush" Color="#CCCCCC"/>
+        <SolidColorBrush x:Key="HeaderTextBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#007ACC"/>
+        <SolidColorBrush x:Key="AccentHoverBrush" Color="#0098FF"/>
+        <SolidColorBrush x:Key="DisabledBrush" Color="#3E3E42"/>
+        <SolidColorBrush x:Key="DisabledTextBrush" Color="#666666"/>
+        <SolidColorBrush x:Key="ReadOnlyBackgroundBrush" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="DataGridRowBrush" Color="#2D2D30"/>
+        <SolidColorBrush x:Key="DataGridAlternatingRowBrush" Color="#252526"/>
+        <SolidColorBrush x:Key="DataGridHeaderBrush" Color="#3E3E42"/>
+
+        <!-- Button Style -->
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AccentHoverBrush}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource DisabledBrush}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DisabledTextBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- GroupBox Style -->
+        <Style TargetType="GroupBox">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Foreground" Value="{StaticResource HeaderTextBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <!-- TextBlock Style -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+        </Style>
+
+        <!-- TextBox Style -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource ReadOnlyBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="2"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <!-- DataGrid Style -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="RowBackground" Value="{StaticResource DataGridRowBrush}"/>
+            <Setter Property="AlternatingRowBackground" Value="{StaticResource DataGridAlternatingRowBrush}"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+        </Style>
+
+        <!-- DataGrid Header Style -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource DataGridHeaderBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HeaderTextBrush}"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="0,0,1,0"/>
+        </Style>
+
+        <!-- DataGrid Cell Style -->
+        <Style TargetType="DataGridCell">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- DataGridRow Style -->
+        <Style TargetType="DataGridRow">
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top: File Selection -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
+            <Button Content="Select Certificate File" Command="{Binding SelectFileCommand}"/>
+        </StackPanel>
+
+        <!-- Status Bar -->
+        <TextBlock Grid.Row="1"
+                   Text="{Binding StatusMessage}"
+                   Foreground="#888888"
+                   FontStyle="Italic"
+                   Margin="0,0,0,10"/>
+
+        <!-- Certificate Content Section -->
+        <GroupBox Grid.Row="2" Header="Certificate Content" Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Copy and Export Buttons -->
+                <StackPanel Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,0,5" Orientation="Horizontal">
+                    <Button Content="Copy"
+                            Command="{Binding CopyCommand}"
+                            Width="80"
+                            Padding="8,4"
+                            Margin="0,0,5,0"/>
+                    <Button Content="Export to File"
+                            Command="{Binding ExportCommand}"
+                            Width="110"
+                            Padding="8,4"/>
+                </StackPanel>
+
+                <!-- Certificate Content TextBox -->
+                <TextBox Grid.Row="1"
+                         Text="{Binding CertificateContent}"
+                         IsReadOnly="True"
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Auto"
+                         TextWrapping="NoWrap"
+                         FontFamily="Consolas"
+                         FontSize="11"
+                         Background="#1E1E1E"
+                         Foreground="#CCCCCC"
+                         BorderBrush="#3E3E42"
+                         BorderThickness="1"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- Properties Section -->
+        <GroupBox Grid.Row="3" Header="Certificate Properties" Margin="0,15,0,0" Height="220">
+            <DataGrid ItemsSource="{Binding Properties}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserResizeRows="False"
+                      SelectionMode="Single"
+                      GridLinesVisibility="Horizontal"
+                      HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Property"
+                                        Binding="{Binding Name}"
+                                        Width="180"
+                                        FontWeight="Bold"/>
+                    <DataGridTextColumn Header="Value"
+                                        Binding="{Binding Value}"
+                                        Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</Window>
