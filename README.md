@@ -1,7 +1,8 @@
 # 🔐 CertDecipher
 
 A modern, dark-themed X.509 certificate viewer for Windows that provides detailed information about certificates, private keys, and certificate signing requests (CSRs).
-<img width="886" height="643" alt="image" src="https://github.com/user-attachments/assets/57232c9d-bbab-485b-ac0b-aa876f7457e6" /> </br>
+<img width="886" height="643" alt="image" src="https://github.com/user-attachments/assets/01d24e4f-d40f-49dd-8588-b564569c0d62" />
+ </br>
 _sample_
 
 ![Version](https://img.shields.io/badge/version-1.0.1-blue)
